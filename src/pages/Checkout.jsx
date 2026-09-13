@@ -9,6 +9,7 @@ import { PaymentMethodSelector, PAYMENT_METHODS } from '../components/checkout/P
 import { PromoCodeInput } from '../components/checkout/PromoCodeInput';
 import { QrisProviderSelector } from '../components/checkout/QrisProviderSelector';
 import { QrisPaymentModal } from '../components/checkout/QrisPaymentModal';
+import { PaymentSimulationModal } from '../components/checkout/PaymentSimulationModal';
 import { Button } from '../components/common/Button';
 
 export const Checkout = () => {
@@ -37,6 +38,7 @@ export const Checkout = () => {
   const [selectedPayment, setSelectedPayment] = useState(PAYMENT_METHODS[0]);
   const [selectedQrisProvider, setSelectedQrisProvider] = useState(null);
   const [showQrisPayment, setShowQrisPayment] = useState(false);
+  const [showPaymentSimulation, setShowPaymentSimulation] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const totalTickets = getTotalTicketCount();
@@ -102,6 +104,7 @@ export const Checkout = () => {
       );
       setIsProcessing(false);
       setShowQrisPayment(false);
+      setShowPaymentSimulation(false);
       addToast('Pembayaran berhasil dikonfirmasi!', 'success');
       navigate('/success');
     }, 1600);
@@ -132,8 +135,8 @@ export const Checkout = () => {
       return;
     }
 
-    // Normal payment methods (VA / Card / Direct)
-    executeFinalBooking(selectedPayment);
+    // All other methods (BCA VA, Mandiri VA, Credit Card, GoPay) open their dedicated simulation modal
+    setShowPaymentSimulation(true);
   };
 
   return (
@@ -279,6 +282,7 @@ export const Checkout = () => {
               onSelectMethod={(method) => {
                 setSelectedPayment(method);
                 setShowQrisPayment(false);
+                setShowPaymentSimulation(false);
               }}
             />
 
@@ -417,6 +421,18 @@ export const Checkout = () => {
             name: `QRIS • ${selectedQrisProvider?.name}`
           })
         }
+        isProcessing={isProcessing}
+      />
+
+      {/* Payment Simulation Modal for VA, Credit Card, and GoPay */}
+      <PaymentSimulationModal
+        isOpen={showPaymentSimulation}
+        onClose={() => setShowPaymentSimulation(false)}
+        paymentMethod={selectedPayment}
+        totalAmount={total}
+        customerName={formData.fullName}
+        customerPhone={formData.phone}
+        onConfirmPayment={() => executeFinalBooking(selectedPayment)}
         isProcessing={isProcessing}
       />
     </div>
