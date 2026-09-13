@@ -41,11 +41,10 @@ export const QrisPaymentModal = ({
         {/* Top Info Banner */}
         <div className="flex items-center justify-between p-3 rounded-xl bg-coral-50 border border-coral-200 text-xs">
           <div className="flex items-center gap-2 text-coral-700 font-semibold font-display">
-            <Sparkles className="w-4 h-4 text-coral-500 shrink-0" />
-            <span>Simulasi Pembayaran</span>
+            <Clock className="w-4 h-4 text-coral-500 shrink-0" />
+            <span>Selesaikan Pembayaran Dalam:</span>
           </div>
           <div className="flex items-center gap-1.5 font-mono font-bold text-coral-700">
-            <Clock className="w-3.5 h-3.5 text-coral-500" />
             <span>{formattedTime}</span>
           </div>
         </div>

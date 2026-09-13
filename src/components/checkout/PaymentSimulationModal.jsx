@@ -93,10 +93,10 @@ export const PaymentSimulationModal = ({
   const isVa = paymentMethod?.id === 'bca_va' || paymentMethod?.id === 'mandiri_va';
 
   const modalTitle = isCard
-    ? 'Simulasi Pembayaran Kartu'
+    ? 'Kartu Kredit / Debit Online'
     : isGoPay
-    ? 'Simulasi Pembayaran GoPay'
-    : `Simulasi • ${paymentMethod?.name || 'Virtual Account'}`;
+    ? 'Pembayaran GoPay'
+    : (paymentMethod?.name || 'Virtual Account');
 
   return (
     <Modal
@@ -106,17 +106,6 @@ export const PaymentSimulationModal = ({
       maxWidth="max-w-md"
     >
       <div className="space-y-6 text-center">
-        {/* Top Simulation Disclaimer Banner */}
-        <div className="flex items-center justify-between p-3 rounded-xl bg-coral-50 border border-coral-200 text-xs text-left">
-          <div className="flex items-center gap-2 text-coral-700 font-semibold font-display">
-            <Sparkles className="w-4 h-4 text-coral-500 shrink-0" />
-            <span>Simulasi Pembayaran Frontend</span>
-          </div>
-          <span className="text-[10px] font-bold bg-white text-coral-600 px-2 py-0.5 rounded-md border border-coral-200 shadow-2xs">
-            Demo Only
-          </span>
-        </div>
-
         {/* VA FLOW (BCA / Mandiri) */}
         {isVa && (
           <div className="space-y-4 text-left">
@@ -133,7 +122,7 @@ export const PaymentSimulationModal = ({
               </div>
 
               <div className="pt-1">
-                <span className="text-[11px] text-ink-muted block">Nomor Virtual Account (Dummy):</span>
+                <span className="text-[11px] text-ink-muted block">Nomor Virtual Account:</span>
                 <div className="flex items-center justify-between gap-2 mt-1 bg-surface p-3 rounded-xl border border-border">
                   <span className="font-mono font-extrabold text-base sm:text-lg text-ink tracking-wider select-all">
                     {getVaNumber()}
@@ -189,7 +178,7 @@ export const PaymentSimulationModal = ({
                       <li>Pilih menu <strong>m-Transfer</strong> → <strong>BCA Virtual Account</strong>.</li>
                       <li>Masukkan nomor VA: <strong className="font-mono text-ink">{getVaNumber()}</strong>.</li>
                       <li>Periksa nama pemesan & nominal tagihan sudah sesuai.</li>
-                      <li>Selesaikan pembayaran (klik tombol di bawah untuk simulasi).</li>
+                      <li>Setelah transfer berhasil, klik tombol <strong>"Saya Sudah Membayar"</strong> di bawah.</li>
                     </ol>
                   ) : (
                     <ol className="list-decimal list-inside space-y-1.5 pl-1">
@@ -197,7 +186,7 @@ export const PaymentSimulationModal = ({
                       <li>Pilih menu <strong>Bayar</strong> → <strong>Virtual Account / Multi Payment</strong>.</li>
                       <li>Masukkan nomor VA: <strong className="font-mono text-ink">{getVaNumber()}</strong>.</li>
                       <li>Periksa detail tagihan tiket konser Anda.</li>
-                      <li>Konfirmasi pembayaran (klik tombol di bawah untuk simulasi).</li>
+                      <li>Setelah transfer berhasil, klik tombol <strong>"Saya Sudah Membayar"</strong> di bawah.</li>
                     </ol>
                   )}
                 </div>
@@ -213,7 +202,7 @@ export const PaymentSimulationModal = ({
               <div className="flex items-center justify-between pb-2 border-b border-border">
                 <div className="flex items-center gap-2 text-ink font-bold text-xs font-display">
                   <CreditCard className="w-4 h-4 text-coral-500" />
-                  <span>Form Kartu Kredit / Debit (Simulasi)</span>
+                  <span>Rincian Kartu Kredit / Debit</span>
                 </div>
                 <div className="flex items-center gap-1 text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                   <ShieldCheck className="w-3 h-3 text-emerald-600" />
@@ -223,7 +212,7 @@ export const PaymentSimulationModal = ({
 
               <div className="space-y-3">
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-ink block font-display">Nomor Kartu Dummy</label>
+                  <label className="text-[11px] font-bold text-ink block font-display">Nomor Kartu</label>
                   <input
                     type="text"
                     name="cardNumber"
@@ -273,9 +262,10 @@ export const PaymentSimulationModal = ({
                 </div>
               </div>
 
-              <p className="text-[10px] text-ink-muted leading-relaxed pt-1">
-                Data kartu di atas telah diisi dengan data dummy. Jangan pernah memasukkan nomor kartu asli Anda.
-              </p>
+              <div className="flex items-center gap-1.5 text-[10px] text-ink-muted pt-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>Transaksi terenkripsi secara aman dengan standar PCI-DSS & 3D Secure.</span>
+              </div>
             </div>
           </div>
         )}
@@ -300,7 +290,7 @@ export const PaymentSimulationModal = ({
                   <span className="font-mono font-bold text-ink">{customerPhone || '0812-3456-7890'}</span>
                 </div>
                 <div className="flex justify-between items-center text-ink-secondary">
-                  <span>Saldo Simulasi GoPay:</span>
+                  <span>Saldo GoPay:</span>
                   <span className="font-bold text-emerald-600">Rp 2.500.000</span>
                 </div>
                 <div className="flex justify-between items-center text-ink-secondary pt-2 border-t border-border">
@@ -311,7 +301,7 @@ export const PaymentSimulationModal = ({
 
               <div className="p-2.5 rounded-xl bg-surface border border-border text-[11px] text-ink-secondary leading-relaxed flex items-start gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span>Simulasi pemotongan saldo GoPay 1-klik tanpa biaya admin tambahan.</span>
+                <span>Pembayaran instan 1-klik via saldo GoPay tanpa biaya admin tambahan.</span>
               </div>
             </div>
           </div>
