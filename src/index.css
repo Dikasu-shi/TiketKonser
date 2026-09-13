@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas text-ink antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Clean Editorial Scrollbars */
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #F7F6F2;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D4D4D4;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #A3A3A3;
+  }
+}
+
+@layer utilities {
+  .editorial-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  
+  .editorial-card:hover {
+    border-color: #D4D4D4;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+  }
+
+  .ticket-stub {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    position: relative;
+  }
+}
+
+/* Print Optimization: Remove browser headers (page title) and footers (URL) */
+@page {
+  margin: 0;
+  size: auto;
+}
+
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  nav,
+  footer,
+  header,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
