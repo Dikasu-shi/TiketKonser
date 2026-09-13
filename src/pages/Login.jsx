@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Ticket, Mail, Lock, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/common/Button';
@@ -9,13 +9,15 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email || !password) return;
     const res = login(email, password);
     if (res?.success) {
-      navigate(-1); // Back to previous page
+      const redirectTarget = location.state?.from || '/';
+      navigate(redirectTarget, { replace: true });
     }
   };
 
@@ -73,7 +75,7 @@ export const Login = () => {
 
         <div className="text-center text-xs text-ink-secondary pt-2">
           Belum punya akun?{' '}
-          <Link to="/register" className="text-coral-600 font-bold hover:underline">
+          <Link to="/register" state={location.state} className="text-coral-600 font-bold hover:underline">
             Daftar Gratis
           </Link>
         </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { ChevronLeft, LayoutGrid, Map, Ticket, ShieldCheck, Clock } from 'lucide-react';
 import { CONCERTS } from '../data/concerts';
+import { useAuth } from '../context/AuthContext';
 import { useBooking } from '../context/BookingContext';
 import { TicketSelector } from '../components/tickets/TicketSelector';
 import { InteractiveSeatMap } from '../components/tickets/InteractiveSeatMap';
@@ -11,6 +12,8 @@ import { Button } from '../components/common/Button';
 export const TicketSelection = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
   const {
     selectedConcert,
     selectedTickets,
@@ -24,10 +27,16 @@ export const TicketSelection = () => {
   const concert = CONCERTS.find((c) => c.id === id);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/login', { state: { from: location.pathname }, replace: true });
+    }
+  }, [isAuthenticated, location.pathname, navigate]);
+
+  useEffect(() => {
     if (concert && (!selectedConcert || selectedConcert.id !== concert.id)) {
       setConcertForBooking(concert);
     }
-  }, [concert, selectedConcert]);
+  }, [concert, selectedConcert, setConcertForBooking]);
 
   if (!concert) {
     return (

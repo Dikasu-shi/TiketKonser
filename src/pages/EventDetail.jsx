@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { CONCERTS } from '../data/concerts';
 import { VENUES } from '../data/venues';
+import { useAuth } from '../context/AuthContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { useToast } from '../context/ToastContext';
 import { Button } from '../components/common/Button';
@@ -26,12 +27,23 @@ import { Badge } from '../components/common/Badge';
 export const EventDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { addToast } = useToast();
 
   const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'lineup', 'venue', 'terms'
 
   const concert = CONCERTS.find((c) => c.id === id);
+
+  const handleBookTickets = () => {
+    if (!concert) return;
+    const targetPath = `/events/${concert.id}/tickets`;
+    if (!isAuthenticated) {
+      navigate('/login', { state: { from: targetPath } });
+    } else {
+      navigate(targetPath);
+    }
+  };
 
   if (!concert) {
     return (
@@ -186,11 +198,15 @@ export const EventDetail = () => {
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
-            <Link to={`/events/${concert.id}/tickets`} className="w-full sm:w-auto">
-              <Button variant="primary" size="lg" icon={Ticket} fullWidth>
-                Pilih Kategori & Pesan Tiket
-              </Button>
-            </Link>
+            <Button
+              variant="primary"
+              size="lg"
+              icon={Ticket}
+              fullWidth
+              onClick={handleBookTickets}
+            >
+              Pilih Kategori & Pesan Tiket
+            </Button>
           </div>
         </div>
       </div>
@@ -366,11 +382,15 @@ export const EventDetail = () => {
                 </div>
               </div>
 
-              <Link to={`/events/${concert.id}/tickets`}>
-                <Button variant="primary" fullWidth size="md" icon={Ticket}>
-                  Pesan Tiket Sekarang
-                </Button>
-              </Link>
+              <Button
+                variant="primary"
+                fullWidth
+                size="md"
+                icon={Ticket}
+                onClick={handleBookTickets}
+              >
+                Pesan Tiket Sekarang
+              </Button>
             </div>
           </div>
         </div>
