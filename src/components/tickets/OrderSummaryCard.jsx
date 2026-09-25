@@ -158,7 +158,7 @@ export const OrderSummaryCard = ({ onProceed, showCheckoutButton = true }) => {
       {/* Trust & Guarantee */}
       <div className="flex items-center justify-center gap-1.5 text-xs text-ink-muted font-medium text-center">
         <ShieldCheck className="w-4 h-4 text-emerald-600" />
-        <span>Sistem proteksi alur pemesanan & kuota real-time</span>
+        <span>Selesaikan pemesanan sebelum waktu habis.</span>
       </div>
     </div>
   );

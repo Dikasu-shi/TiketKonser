@@ -62,7 +62,7 @@ export const Home = () => {
                 </h1>
 
                 <p className="text-sm sm:text-base text-ink-secondary leading-relaxed max-w-xl">
-                  Platform eksplorasi dan reservasi tiket konser musik kelas dunia di Indonesia dengan pemilihan denah tribun interaktif, sistem proteksi kuota real-time, dan e-ticket instan.
+                  Jelajahi konser, pilih area lewat denah interaktif, dan pesan tiket dengan mudah.
                 </p>
 
                 {/* Search Bar Form */}
@@ -102,7 +102,7 @@ export const Home = () => {
                 {/* Feature highlight pills */}
                 <div className="pt-3 flex flex-wrap items-center gap-5 text-xs text-ink-secondary font-medium">
                   <span className="flex items-center gap-1.5 text-ink">
-                    <Zap className="w-4 h-4 text-coral-500" /> Pilih Kursi Sendiri
+                    <Zap className="w-4 h-4 text-coral-500" /> Denah Stadion Interaktif
                   </span>
                   <span className="flex items-center gap-1.5 text-ink">
                     <Ticket className="w-4 h-4 text-coral-500" /> E-Tiket dengan QR Code
