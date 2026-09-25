@@ -55,37 +55,22 @@ export const Footer = () => {
             <h4 className="text-xs font-bold text-white uppercase tracking-widest font-display">Connect</h4>
             <ul className="space-y-2.5 text-xs">
               <li>
-                <a
-                  href="https://github.com/Dikasu-shi"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group"
-                >
+                <span className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group cursor-default">
                   <GithubIcon className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
                   <span>GitHub ↗</span>
-                </a>
+                </span>
               </li>
               <li>
-                <a
-                  href="https://www.linkedin.com/in/dika-ahmad-imamul-mutakin-646319421/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group"
-                >
+                <span className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group cursor-default">
                   <LinkedinIcon className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
                   <span>LinkedIn ↗</span>
-                </a>
+                </span>
               </li>
               <li>
-                <a
-                  href="https://dikaahmad-portfolio.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group"
-                >
+                <span className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group cursor-default">
                   <Globe className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
                   <span>My Portfolio ↗</span>
-                </a>
+                </span>
               </li>
             </ul>
           </div>

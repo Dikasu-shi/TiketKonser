@@ -102,13 +102,13 @@ export const Home = () => {
                 {/* Feature highlight pills */}
                 <div className="pt-3 flex flex-wrap items-center gap-5 text-xs text-ink-secondary font-medium">
                   <span className="flex items-center gap-1.5 text-ink">
-                    <Zap className="w-4 h-4 text-coral-500" /> Interactive Seat Map
+                    <Zap className="w-4 h-4 text-coral-500" /> Pilih Kursi Sendiri
                   </span>
                   <span className="flex items-center gap-1.5 text-ink">
-                    <Ticket className="w-4 h-4 text-coral-500" /> Instant QR Pass
+                    <Ticket className="w-4 h-4 text-coral-500" /> E-Tiket dengan QR Code
                   </span>
                   <span className="flex items-center gap-1.5 text-ink">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" /> 10-Min Quota Lock
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" /> 10 Menit untuk Checkout
                   </span>
                 </div>
               </div>
